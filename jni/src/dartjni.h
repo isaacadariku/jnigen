@@ -163,7 +163,7 @@ static inline void __load_class_into(jclass* cls, const char* name) {
   jstring className = (*jniEnv)->NewStringUTF(jniEnv, name);
   *cls = (*jniEnv)->CallObjectMethod(jniEnv, jni.classLoader,
                                      jni.loadClassMethod, className);
-  (*jniEnv)->DeleteLocalRef(jniEnv, className);
+  // (*jniEnv)->DeleteLocalRef(jniEnv, className);
 #else
   *cls = (*jniEnv)->FindClass(jniEnv, name);
 #endif
@@ -180,7 +180,7 @@ static inline void load_class_gr(jclass* cls, const char* name) {
     jclass tmp;
     __load_class_into(&tmp, name);
     *cls = (*jniEnv)->NewGlobalRef(jniEnv, tmp);
-    (*jniEnv)->DeleteLocalRef(jniEnv, tmp);
+    // (*jniEnv)->DeleteLocalRef(jniEnv, tmp);
   }
 }
 
@@ -228,7 +228,7 @@ static inline void load_static_field(jclass cls,
 
 static inline jobject to_global_ref(jobject ref) {
   jobject g = (*jniEnv)->NewGlobalRef(jniEnv, ref);
-  (*jniEnv)->DeleteLocalRef(jniEnv, ref);
+  // (*jniEnv)->DeleteLocalRef(jniEnv, ref);
   return g;
 }
 
